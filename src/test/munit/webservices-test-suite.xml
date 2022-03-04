@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="webservices-test-suite.xml" />
+	<munit:test name="webservices-test-suite-webservicesFlowTest" doc:id="935910b8-27e6-4930-9036-8bced4beba8d" description="Test">
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="a4b0ba57-29fb-4e36-aa9e-266c192e1bcd" />
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to webservicesFlow" doc:id="fdba9b90-3f26-4573-8934-56895930c350" name="webservicesFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit:set-null-payload doc:name="Set null payload" doc:id="201e6737-05c4-4b0f-9f2b-6166a9352986" />
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

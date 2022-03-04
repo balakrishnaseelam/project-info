@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="webservices-suite.xml" />
+	<munit:test name="webservicesFlow-test" doc:id="79a08cb9-1b46-4563-a67f-259505323431" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="357cd06e-c65f-4582-8768-cc02df50936b" >
+				<munit:payload value="#[readUrl('classpath://webservicesFlowtest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://webservicesFlowtest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to webservicesFlow" doc:id="9893fdea-3b92-4f97-aeb5-0eeb785895f8" name="webservicesFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="a57c0812-8c4a-4029-8919-e5435945b9ff" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import webservicesFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="webservicesFlow-test1" doc:id="e17f4219-bdae-4cd6-9096-2254f2216832" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="853e1290-2836-4df3-ba5d-7402f927aeef" >
+				<munit:payload value="#[readUrl('classpath://webservicesFlowtest1\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://webservicesFlowtest1\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to webservicesFlow" doc:id="0322289d-ec95-4edc-98c3-0c77fb19aa3c" name="webservicesFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="97990c6f-e6c2-4519-8f2c-daa71b2d2c52" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import webservicesFlowtest1::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
